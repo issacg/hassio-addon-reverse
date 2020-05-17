@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:19.10
 
 WORKDIR /workspaces
 
@@ -9,7 +9,7 @@ ENV DEBIAN_FRONTEND noninteractive
 # Set shell
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-# Install docker
+# Install docker and jq 
 # https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/
 RUN apt-get update && apt-get install -y --no-install-recommends \
         apt-transport-https \
@@ -19,6 +19,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         software-properties-common \
         gpg-agent \
         git \
+        jq \
         sudo \
     && curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - \
     && add-apt-repository "deb https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" \
@@ -32,7 +33,7 @@ COPY .devcontainer/start_hassio.sh /usr/local/bin/start_hassio.sh
 
 # Install dependencies for the add-on development below.  For example, if you're running Node.js,
 # you may want something like the following...
-# RUN apt-get install -y --no-install-recommends nodejs npm
+RUN apt-get install -y --no-install-recommends nodejs npm
 
 # Generate a machine-id for this container
 RUN rm /etc/machine-id && dbus-uuidgen --ensure=/etc/machine-id

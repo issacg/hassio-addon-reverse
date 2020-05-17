@@ -3,7 +3,11 @@ FROM $BUILD_FROM
 
 ENV LANG C.UTF-8
 
-WORKDIR /
+WORKDIR /app
+RUN apk add --update --no-cache nodejs npm dumb-init
+COPY /app/package.json /app/package-lock.json /app/
+RUN npm install
+COPY /app/ /app/
 COPY start.sh /app/start.sh
 ENTRYPOINT ["/app/start.sh"]
 

@@ -23,7 +23,7 @@
             "group": "test",
             "presentation": {
                 "reveal": "always",
-                "panel": "new"
+                "panel": "shared"
             },
             "problemMatcher": []
         },{
@@ -34,6 +34,25 @@
             "presentation": {
                 "reveal": "always",
                 "panel": "new"
+            },
+            "problemMatcher": []
+        },{
+            "label": "Assume addon token",
+            "type": "shell",
+            "command": "echo SUPERVISOR_TOKEN=$(jq -r .user.local_$(jq -r .slug ${workspaceFolder}/config.json).access_token ${workspaceFolder}/../../../addons.json) > ${workspaceFolder}/.env",
+            "presentation": {
+                "reveal": "silent",
+                "echo": false
+            },
+            "problemMatcher": []
+        },{
+            "label": "Generate /data/options.json",
+            "type": "shell",
+            "command": "mkdir -p /data && jq -r .options ${workspaceFolder}/config.json | tee /data/options.json",
+            "presentation": {
+                "reveal": "always",
+                "focus": true,
+                "panel": "shared"
             },
             "problemMatcher": []
         }
