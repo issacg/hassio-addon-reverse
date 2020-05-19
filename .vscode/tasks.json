@@ -55,6 +55,16 @@
                 "panel": "shared"
             },
             "problemMatcher": []
+        },{
+            "label": "Ingress proxy to port 8080",
+            "type": "shell",
+            "command": "SUPERVISOR_TOKEN=$(jq -r .user.local_$(jq -r .slug ${workspaceFolder}/config.json).access_token ${workspaceFolder}/../../../addons.json) bashio ${workspaceFolder}/scripts/proxy.sh",
+            "presentation": {
+                "reveal": "always",
+                "focus": true,
+                "panel": "shared"
+            },
+            "problemMatcher": []
         }
     ]
 }

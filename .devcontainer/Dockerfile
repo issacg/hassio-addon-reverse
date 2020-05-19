@@ -20,6 +20,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         gpg-agent \
         git \
         jq \
+        socat \
         sudo \
     && curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - \
     && add-apt-repository "deb https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" \
@@ -28,6 +29,18 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         docker-ce-cli \
         containerd.io
 # This is a development container.  Don't bother to clean up apt cache, this way we have it handy later
+
+# Install bashio
+RUN curl -J -L -o /tmp/bashio.tar.gz \
+        "https://github.com/hassio-addons/bashio/archive/v0.9.0.tar.gz" \
+    && mkdir /tmp/bashio \
+    && tar zxvf \
+        /tmp/bashio.tar.gz \
+        --strip 1 -C /tmp/bashio \
+    \
+    && mv /tmp/bashio/lib /usr/lib/bashio \
+    && ln -s /usr/lib/bashio/bashio /usr/bin/bashio \
+    && rm -fr /tmp/bashio*
 
 COPY .devcontainer/start_hassio.sh /usr/local/bin/start_hassio.sh
 

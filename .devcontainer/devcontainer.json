@@ -4,7 +4,7 @@
 	"name": "Hass.io Add-On",
 	"context": "..",
 	"dockerFile": "Dockerfile",
-	"appPort": 8123,
+	"appPort": [8123, 8080],
 	"runArgs": [
 		"-e", "GIT_EDITOR=code --wait",
 		"--privileged",
@@ -18,12 +18,11 @@
 	"mounts": [
 		// Cache docker images between devcontainer rebuilds (and share between devcontainers)
 		"source=vsc-hassio-docker,target=/var/lib/docker,type=volume"
-	]
+	],
 
 	// Post-create command to initialize the workspace.  For example, for a node.js add-on you may want:
-	// "postCreateCommand": "cd /workspaces/test_hassio/addons/local/myaddon && npm install",
-	// "extensions": [
-	//	"dbaeumer.vscode-eslint",
-	// 	"maty.vscode-mocha-sidebar"
-	// ]
+	"postCreateCommand": "cd /workspaces/test_hassio/addons/local/myaddon && npm install",
+	 "extensions": [
+		"dbaeumer.vscode-eslint"
+	]
 }
