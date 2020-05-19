@@ -1,53 +1,25 @@
-# Hass.io Add-on Devcontainer Template
+# Sensor String Reverse
 
 ### Summary
 
-This is a templated to ease development of Hass.io add-ons inside of a VS Code [devcontainer](https://code.visualstudio.com/docs/remote/containers)
+This is an sample add-on for the article at https://www.linkedin.com/pulse/advanced-home-assistant-add-on-development-visual-studio-goldstand
 
 ### Usage 
 
-Simply copy the contents of this repository to the base directory of the add-on you are developing.  Modify the files in the directory as needed.  
+Define an input entity and a target output entity and run.  IMPORTANT: The input entity state is expected to be a string!
 
-Your add-on will be appear in the `Local Add-ons` section of the Hass.io Add-On Store tab.
+### License
 
-#### VS Code Tasks
+Copyright 2020 Issac Goldstand <margol@beamartyr.net>
 
-The following tasks are included for your convenience.
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
 
-- Start Hass.io
+    http://www.apache.org/licenses/LICENSE-2.0
 
-This task will download and run a Hass.io environment inside the container using the latest `dev` targets of Hass.io and Home Assistant.  It will be mapped to port 8123 (by default) on the host machine
-
-- Run Hass.io CLI - _Requires a running Hass.io_
-
-This task will open a Hass.io CLI window inside VS Code
-
-- Cleanup stale Hass.io environment
-
-This task will nuke the data stored by Hass.io (including the underlying Home Assistant).  Can be used to revert to a pristine state before starting Hass.io
-
-### FAQ
-
-Q: How do I customize some-widget-or-another?
-
-A: There is almost no "black magic" going on here.  Make sure to read up on how devcontainers work from the [official website](https://code.visualstudio.com/docs/remote/containers)
-
-Q: I read the docs.  I still need help customizing some-widget-or-another!
-
-A: Come ask on [Discord](https://discordapp.com/invite/2Uath3J) in channel #hassio_dev
-
-Q: How do I develop more than one add-on in the same Hass.io instance?
-
-A: See [this issue](https://github.com/issacg/hassio-addon-devcontainer/issues/1).
-
-Q: Why are there 2 `Dockerfile`s?  
-
-A: The `.devcontainer\Dockerfile` is for your development environment.  The `Dockerfile` in the root directory is to build your Add-on.
-
-Q: I added `.devcontainer` to my `.dockerignore` and now things are broken.
-
-A: Don't.  The `.dockerignore` is shared by both Dockerfiles, and by adding `.devcontainer` to your `.dockerignore`, you will break things in the devcontainer.  Instead, use other means to avoid copying `.devcontainer` (and `.vscode` for that matter) in your "production" `Dockerfile`.
-
-Q: When installing my local add-on, I'm not seeing my latest changes.  Instead, I see the functionality of the last published version of my add-on.
-
-A: Make sure that you remove the `image` key from your `config.json`, else when "installing" the add-on, it will try to use the docker image, rather than building the add-on locally.
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
