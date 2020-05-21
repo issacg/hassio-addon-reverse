@@ -9,7 +9,10 @@ ENV DEBIAN_FRONTEND noninteractive
 # Set shell
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-# Install docker and jq 
+# Use the mirror protocol for a fast mirror
+RUN sed -i -e 's/http:\/\/archive\.ubuntu\.com\/ubuntu\//mirror:\/\/mirrors\.ubuntu\.com\/mirrors\.txt/' /etc/apt/sources.list
+
+# Install docker, socat and jq 
 # https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/
 RUN apt-get update && apt-get install -y --no-install-recommends \
         apt-transport-https \
